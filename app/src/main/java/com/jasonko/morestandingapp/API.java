@@ -98,7 +98,7 @@ public class API {
             BufferedReader reader = null;
             StringBuffer sbf = new StringBuffer() ;
 
-            URL url  = new URL( API_URL + "/app/login/"+ account + "/" + password +"?lat="+lat+"long="+lng) ;
+            URL url  = new URL( API_URL + "/app/login/"+ account + "/" + password +"?lat="+lat+"&long="+lng) ;
             HttpURLConnection connection = (HttpURLConnection) url.openConnection() ;
             //设置超时时间 10s
             connection.setConnectTimeout(10000);

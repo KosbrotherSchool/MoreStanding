@@ -7,6 +7,8 @@ import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.webkit.CookieManager;
+import android.webkit.CookieSyncManager;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
@@ -181,11 +183,13 @@ public class FullscreenActivity extends Activity implements GoogleApiClient.Conn
         mLastLocation = LocationServices.FusedLocationApi
                 .getLastLocation(mGoogleApiClient);
         if (mLastLocation!=null) {
-//            Toast.makeText(this, mLastLocation.getLatitude() + ", " + mLastLocation.getLongitude(), Toast.LENGTH_SHORT).show();
-            new PostLocationTask().execute();
+            Toast.makeText(this, mLastLocation.getLatitude() + ", " + mLastLocation.getLongitude(), Toast.LENGTH_SHORT).show();
+//            new PostLocationTask().execute();
+            // todo sent cookie
+            new UpdateCookieTask().execute();
         }else {
             mGoogleApiClient.connect();
-//            Toast.makeText(this, "Location is null!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Location is null!", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -231,6 +235,27 @@ public class FullscreenActivity extends Activity implements GoogleApiClient.Conn
         myPre.edit().putString("regID", registrationId).commit();
     }
 
+
+    private class UpdateCookieTask extends AsyncTask {
+        @Override
+        protected Object doInBackground(Object[] params) {
+            String cookies = "lat=" + Double.toString(mLastLocation.getLatitude()) + "; long=" + Double.toString(mLastLocation.getLongitude());
+            if (android.os.Build.VERSION.SDK_INT >= 21) {
+                CookieManager cookieManager = CookieManager.getInstance();
+                cookieManager.setAcceptCookie(true);
+                cookieManager.setCookie(API.API_URL + "/app/login/" + str_account + "/" + str_password, cookies);
+                cookieManager.flush();
+            }else {
+                CookieSyncManager.createInstance(FullscreenActivity.this);
+                CookieManager cookieManager = CookieManager.getInstance();
+                cookieManager.setAcceptCookie(true);
+                cookieManager.setCookie(API.API_URL + "/app/login/" + str_account + "/" + str_password, cookies);
+                CookieSyncManager.getInstance().sync();  //强制立即同步cookie
+            }
+            return null;
+        }
+    }
+
     private class PushGCMAsyncTask extends AsyncTask {
         @Override
         protected Object doInBackground(Object[] params) {
@@ -270,10 +295,10 @@ public class FullscreenActivity extends Activity implements GoogleApiClient.Conn
 
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-            finish();
-
-    }
+//    @Override
+//    protected void onStop() {
+//        super.onStop();
+//            finish();
+//
+//    }
 }
