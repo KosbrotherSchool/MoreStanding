@@ -1,0 +1,96 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_selector"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:paddingBottom="60dp"
+    >
+
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!-->-->
+        <!--<Button-->
+            <!--android:id="@+id/btn_login_2"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="log in 2"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--/>-->
+    <!--</RelativeLayout>-->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:textColor="@color/white"
+        android:textSize="40dp"
+        />
+
+    <EditText
+        android:id="@+id/edit_account"
+        android:layout_width="235dp"
+        android:layout_height="40dp"
+        android:hint="account"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/green_button_selector"
+        android:gravity="center"
+        />
+
+    <EditText
+        android:id="@+id/edit_password"
+        android:layout_width="235dp"
+        android:layout_height="40dp"
+        android:hint="password"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
+        android:background="@drawable/green_button_selector"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:inputType="textPassword"
+        />
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="235dp"
+        android:layout_height="40dp"
+        android:text="login"
+        android:textColor="@color/green"
+        android:background="@drawable/login_selector"
+        android:layout_marginTop="5dp"
+        />
+
+    <!--<Button-->
+        <!--android:id="@+id/btn_push"-->
+        <!--android:layout_width="235dp"-->
+        <!--android:layout_height="40dp"-->
+        <!--android:text="btn push"-->
+        <!--android:textColor="@color/green"-->
+        <!--android:background="@drawable/login_selector"-->
+        <!--android:layout_marginTop="5dp"-->
+        <!--/>-->
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Remember me"
+            android:textColor="@color/white"
+            />
+        <CheckBox
+            android:id="@+id/checkbox_remember"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+
+</LinearLayout>
